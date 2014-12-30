@@ -65,8 +65,9 @@ public class Convert {
 	 * @return
 	 */
 	public static byte[] longToByte(long value) {
-		return new byte[] { (byte) (value), (byte) ((value >> 8)), (byte) ((value >> 16)), (byte) ((value >> 24)), (byte) ((value >> 32)), (byte) ((value >> 40)), (byte) ((value >> 48)),
-				(byte) ((value >> 56)) };
+		return new byte[] { (byte) (value), (byte) ((value >> 8)), (byte) ((value >> 16))
+				, (byte) ((value >> 24)), (byte) ((value >> 32)), (byte) ((value >> 40))
+				, (byte) ((value >> 48)), (byte) ((value >> 56)) };
 	}
 	/**
 	 * Convert a array of height byte(8bit) to a long(64bit).
@@ -75,8 +76,10 @@ public class Convert {
 	 * @return
 	 */
 	public static long byteToLong(byte[] value) {
-		return ((long) (value[0] & 0xFF)) + ((long) ((value[1] & 0xFF)) << 8) + ((long) ((value[2] & 0xFF)) << 16) + ((long) ((value[3] & 0xFF)) << 24) + ((long) ((value[4] & 0xFF)) << 32)
-				+ ((long) ((value[5] & 0xFF)) << 40) + ((long) ((value[6] & 0xFF)) << 48) + ((long) ((value[7])) << 56);
+		return ((long) (value[0] & 0xFF)) + ((long) ((value[1] & 0xFF)) << 8) + 
+				((long) ((value[2] & 0xFF)) << 16) + ((long) ((value[3] & 0xFF)) << 24) + 
+				((long) ((value[4] & 0xFF)) << 32) + ((long) ((value[5] & 0xFF)) << 40) +
+				((long) ((value[6] & 0xFF)) << 48) + ((long) ((value[7])) << 56);
 	}
 
 }
