@@ -39,10 +39,7 @@ public class Convert {
 	 * @return
 	 */
 	public static byte[] shortToByte(short value){ 
-		byte[] b = new byte[2];
-		b[0] = (byte) (value);
-		b[1] = (byte) (value >> 8);
-		return b;
+		return new byte[]{(byte) (value), (byte) (value >> 8)};
 	}
 	/**
 	 * Convert a array of two byte(8bit) to a short(16bit).
@@ -50,9 +47,7 @@ public class Convert {
 	 * @return
 	 */
 	public static short byteToShort(byte[] value){
-		short s = 0;
-		s = (short) ((value[0] & 0xFF) + (short)(value[1] << 8));
-		return s;
+		return (short) ((value[0] & 0xFF) + (short)(value[1] << 8));
 	}
 
 }
