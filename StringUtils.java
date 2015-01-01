@@ -26,19 +26,21 @@ public class StringUtils {
 	 */
 	public static String formatNumber(double number){
 		char n = ' ';
-		char[] mult = {'K', 'M', 'B', 'T', 'q', 'Q', 's', 'S', 'O', 'N', 'd', 'U', 'D', '!', '@', '#', '$', '%', '^', '&', '*'};
-		for (int i = 0; (float)number/1000 > 1; i++){
+		char[] mult = {'K', 'M', 'B', 'T', 'q', 'Q', 's', 'S', 'O', 'N', 'd', 'U', 'D', '!', '@', '#'};
+		for (int i = 0; number/1000 > 1; i++){
 			number /= 1000;
+			if (i < mult.length)
 			n = mult[i];
 		}
+		number = (long)number;
 		if (number < 10){
-			number = ((long)(number * 1000));
+			number = number * 1000;
 			number /= 1000;
 		} else if (number < 100){
-			number = ((long)(number * 100));
+			number = number * 100;
 			number /= 100;
 		} else {
-			number = ((long)(number * 10));
+			number = number * 10;
 			number /= 10;
 		}
 		String str = Double.toString(number) + Character.toString(n);
