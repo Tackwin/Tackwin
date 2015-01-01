@@ -26,7 +26,7 @@ public class StringUtils {
 	 */
 	public static String formatNumber(double number){
 		char n = ' ';
-		char[] mult = {'K', 'M', 'B', 'T', 'q', 'Q', 's', 'S'};
+		char[] mult = {'K', 'M', 'B', 'T', 'q', 'Q', 's', 'S', 'O', 'N', 'd', 'U', 'D', '!', '@', '#', '$', '%', '^', '&', '*'};
 		for (int i = 0; (float)number/1000 > 1; i++){
 			number /= 1000;
 			n = mult[i];
