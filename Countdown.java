@@ -1,3 +1,4 @@
+
 public class Countdown {
 
 	private boolean play = true;
@@ -30,6 +31,13 @@ public class Countdown {
 	 */
 	public void setTime(float time){
 		this.time = time;
+	}
+	
+	/**
+	 * Accomplished the timer
+	 */
+	public void forceOver(){
+		this.timer = 0;
 	}
 
 	/**
