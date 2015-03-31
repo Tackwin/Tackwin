@@ -32,7 +32,7 @@ public class Window{
 		Input.create();
 		
 		if (glfwInit() != GL_TRUE){
-			System.err.println("Something went wrong with the initialisation of glfw (Window.java : init())");
+			System.err.println("(Window.java : init())");
 			throw(new IllegalStateException());
 		}
 		
@@ -40,7 +40,7 @@ public class Window{
 		
 		window = glfwCreateWindow(width, height, title, 0L, 0L);
 		if (window == 0){
-			System.err.println("Something went wrong with the cretion of window (Window.java : init())");
+			System.err.println("(Window.java : init())");
 			throw(new IllegalStateException());
 		}
 		
