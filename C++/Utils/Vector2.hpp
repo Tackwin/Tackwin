@@ -3,12 +3,16 @@
 #include <Box2D\Common\b2Math.h>
 #include <SFML\System\Vector2.hpp>
 
+#define PIXL_TO_METER 0.01
+
 class Vector2 {
 public:
 	float x;
 	float y;
 
 	Vector2();
+	template<typename T> Vector2<T>(sf::Vector2<T> &vec);
+	Vector2(std::string &string);
 	Vector2(float x = 0, float y = 0);
 	~Vector2();
 
@@ -30,6 +34,8 @@ public:
 	void rotate90();
 	
 	void print(const std::string pre = "", const std::string sui = "");
+	void readFromString(std::string &string);
+	void writetoString(std::string *string);
 
 	Vector2& operator=(const Vector2 &A);
 
