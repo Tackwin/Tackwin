@@ -3,16 +3,7 @@
 #include <cmath>
 #include "Vector2.hpp"
 
-
 Vector2::Vector2() : x(0), y(0) {
-}
-
-template<typename T> Vector2::Vector2<T>(sf::Vector2<T> &vec) : x(0), y(0) {
-	x = vec.x;
-	y = vec.y;
-}
-Vector2::Vector2(std::string &string) : x(0), y(0) {
-	readFromString(string);
 }
 Vector2::Vector2(float x, float y) : x(x), y(y) {
 }
@@ -75,15 +66,6 @@ void Vector2::print(const std::string pre, const std::string sui) {
 	std::printf("X: %f; Y: %f ", x, y);
 	std::printf(sui.c_str());
 	std::printf("\n");
-}
-
-void Vector2::readFromString(std::string &string) {
-	x = std::stof(string.substr(0, string.find(';')));
-	y = std::stof(string.substr(string.find(';') + 1));
-}
-
-void Vector2::writetoString(std::string *string) {
-	*string += std::to_string(x) + ';' + std::to_string(y) + '\n';
 }
 
 Vector2& Vector2::operator=(const Vector2 &A) {
