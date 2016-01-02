@@ -1,20 +1,31 @@
 #pragma once
 #include <string>
-#include <Box2D\Common\b2Math.h>
-#include <SFML\System\Vector2.hpp>
-
-#define PIXL_TO_METER 0.1
-
+#include <SFML\Graphics.hpp>
 class Vector {
 public:
-	float x;
-	float y;
+	static const Vector ZERO;
+public:
+	float x = 0.f;
+	float y = 0.f;
 
-	Vector();
-	Vector(std::string &string);
-	template<typename T> Vector(sf::Vector2<T> &A);
-	Vector(float x = 0, float y = 0);
+	Vector(const Vector &vector);
+	template<typename T>
+		Vector(const sf::Vector2<T> &vec);
+	Vector(const float &x = 0.f, const float &y = 0.f);
 	~Vector();
+
+	inline Vector& get() { return *this; }
+
+	Vector& set(Vector &other);
+	Vector& set(float x, float y);
+	Vector& setX(float x);
+	Vector& setX(const Vector &x);
+	Vector& setY(float y);
+	Vector& setY(const Vector &y);
+	Vector& addX(float x);
+	Vector& addX(const Vector &x);
+	Vector& addY(float y);
+	Vector& addY(const Vector &x);
 
 	float length() const;
 	float length2() const;
@@ -28,28 +39,48 @@ public:
 	float angleTo(const float &x, const float &y) const;
 	float angleTo(const Vector &A) const;
 
-	void normalize(float length = 1.f);
-	
-	void rotate(float rad);
-	void rotate90();
-	
-	void print(const std::string pre = "", const std::string sui = "");
-	void readFromString(std::string &string);
+
+	Vector getDir();
+
+	Vector& normalize(float length = 1.f);
+
+	Vector& rotate(float rad);
+	Vector& rotTo(float rad);
+	Vector& rotate90();
+
+	void print(const std::string pre = "", const std::string sui = "") const;
+	void readFromString(const std::string &string);
 	void writetoString(std::string *string);
 
 	Vector& operator=(const Vector &A);
 
 	Vector operator+(const Vector &A) const;
 	Vector& operator+=(const Vector &A);
+	template<typename T>
+	Vector operator+(const T &A) const;
+	template<typename T>
+	Vector& operator+=(const T &A);
 
 	Vector operator-(const Vector &A) const;
 	Vector& operator-=(const Vector &A);
+	template<typename T>
+	Vector operator-(const T &A) const;
+	template<typename T>
+	Vector& operator-=(const T &A);
 
 	Vector operator*(const Vector &A) const;
 	Vector& operator*=(const Vector &A);
-	
+	template<typename T>
+	Vector operator*(const T &A) const;
+	template<typename T>
+	Vector& operator*=(const T &A);
+
 	Vector operator/(const Vector &A) const;
 	Vector& operator/=(const Vector &A);
+	template<typename T>
+	Vector operator/(const T &A) const;
+	template<typename T>
+	Vector& operator/=(const T &A);
 
 	bool operator==(const Vector &A) const;
 	bool operator!=(const Vector &A) const;
@@ -58,7 +89,60 @@ public:
 	bool operator<(const Vector &A) const;
 	bool operator<=(const Vector &A) const;
 
-	template<typename T> operator sf::Vector2<T>();
-	operator b2Vec2();
+	operator sf::Vector2f() const;
+
+public:
+	inline static float det(const Vector &A, const Vector &B) {
+		return A.x * B.y - A.y * B.x;
+	}
+	static bool intersect(const Vector &po, const Vector &p1, const Vector &p2, const Vector &p3);
+	inline static bool equal(const Vector &a, const Vector &b, float eps = 0.1f) {
+		return b.distTo2(a) < eps * eps;
+	}
 };
+
+template<typename T>
+inline Vector Vector::operator*(const T & A) const {
+	return Vector(x * static_cast<const float>(A), y * static_cast<const float>(A));
+}
+template<typename T>
+inline Vector& Vector::operator*=(const T & A) {
+	x *= A;
+	y *= A;
+	return *this;
+}
+
+template<typename T>
+inline Vector Vector::operator/(const T & A) const {
+	return Vector(x / A, y / A);
+}
+template<typename T>
+inline Vector& Vector::operator/=(const T & A) {
+	x /= A;
+	y /= A;
+	return *this;
+}
+
+template<typename T>
+inline Vector Vector::operator+(const T & A) const {
+	return Vector(x + A, y + A);
+}
+template<typename T>
+inline Vector& Vector::operator+=(const T & A) {
+	x += A;
+	y += A;
+	return *this;
+}
+
+template<typename T>
+inline Vector Vector::operator-(const T & A) const {
+	return Vector(x - A, y - A);
+}
+template<typename T>
+inline Vector& Vector::operator-=(const T & A) {
+	x -= A;
+	y -= A;
+	return *this;
+}
+
 
