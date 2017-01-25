@@ -8,9 +8,9 @@
 
 struct Clock {
 private:
-	double T = 0;
-	double L = 0;
-	bool flag = false;
+	double _T = 0;
+	double _L = 0;
+	bool _flag = false;
 
 	static inline double now(void) {
 		#ifdef __ANDROID__
@@ -31,38 +31,38 @@ private:
 	} 
 
 public:
-	double timer = 0.f;
+	double _timer = 0.f;
 
-	Clock(double timer = 0.0) : timer(timer), L(now()) {}
+	Clock(double timer = 0.0) : _timer(timer), L(now()) {}
 	~Clock() {}
 
 	inline double start(){
-		L = now();
-		flag = false;
+		_L = now();
+		_flag = false;
 		return T;
 	}
 	inline double pause(){
-		T += now() - L;
-		flag = true;
+		_T += now() - L;
+		_flag = true;
 		return T;
 	}
 	inline double restart(){
-		double t = (flag) ? T : T + now() - L;
-		T = 0;
+		double t = (flag) ? _T : _T + now() - _L;
+		_T = 0;
 		start();
 		return t;
 	}
 	inline double elapsed() const {
-		if(flag)
-			return T;
+		if(_flag)
+			return _T;
 		else
-			return T + now() - L;
+			return _T + now() - _L;
 	}
 	inline bool isOver() const{
-		return elapsed() >= timer;
+		return elapsed() >= _timer;
 	}
 	inline bool isPaused() const {
-		return flag;
+		return _flag;
 	}
 
 };
