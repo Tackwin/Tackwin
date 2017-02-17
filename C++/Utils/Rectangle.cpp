@@ -12,7 +12,7 @@ Rectangle::Rectangle(Vector p, Vector s) : x(p.x), y(p.y), w(s.x), h(s.y) {
 Rectangle::~Rectangle() {
 }
 
-bool Rectangle::contains(Vector p) const {
+bool Rectangle::contains(Vector<> p) const {
 	return  x < p.x && p.x < x + h &&
 		    y < p.y && p.y < y + h;
 }
